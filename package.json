@@ -1,0 +1,22 @@
+{
+  "name": "react",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@firebase/app": "^0.5.4",
+    "@firebase/util": "0.2.40",
+    "firebase": "7.9.1",
+    "react": "0.0.0-experimental-5de5b6150",
+    "react-dom": "0.0.0-experimental-5de5b6150",
+    "reactfire": "2.0.0-rc.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "react-scripts": "latest"
+  }
+}

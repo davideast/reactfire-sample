@@ -1,0 +1,20 @@
+h1, p {
+  font-family: Lato;
+  text-align:center;
+}
+
+.border-top-left-radius-lg {
+  border-top-left-radius: .5rem;
+}
+
+.border-top-right-radius-lg {
+  border-top-right-radius: .5rem;
+}
+
+.border-bottom-left-radius-lg {
+  border-bottom-left-radius: .5rem;
+}
+
+.border-bottom-right-radius-lg {
+  border-bottom-right-radius: .5rem;
+}
