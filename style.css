@@ -3,6 +3,10 @@ h1, p {
   text-align:center;
 }
 
+body {
+  padding: 1rem;
+}
+
 .border-top-left-radius-lg {
   border-top-left-radius: .5rem;
 }
