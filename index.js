@@ -9,50 +9,64 @@ import {
   useFirestore,
   useFirestoreCollectionData
 } from "reactfire";
-import { PurpleButton, TaskItem, InputBar } from './components';
+import { PurpleButton, TaskItem, InputBar } from "./components";
+import config from "./firebaseConfig";
 
 function FirebaseWrappedApp() {
   return (
     <FirebaseAppProvider firebaseConfig={config}>
-      <Suspense fallback={<div>Loading... lol...</div>}>
+      <Suspense fallback={<div>Loading... lol..</div>}>
         <App />
       </Suspense>
     </FirebaseAppProvider>
-  )
+  );
 }
 
 function App() {
   const app = useFirebaseApp();
-  const db = useFirestore();
   const user = useUser();
+  const db = useFirestore();
   const tasksCol = db.collection("tasks");
-  const query = tasksCol.where('uid', '==', user.uid);
-  const tasks = useFirestoreCollectionData(query, { idField: "id" });
+  const tasks = useFirestoreCollectionData(tasksCol, {
+    idField: "id"
+  });
 
-  function logInUser(app) {
+  async function logInUser(app) {
     app.auth().signInAnonymously();
   }
 
-  function completeItem(item) {
-    tasksCol.doc(item.id).delete();
-  }
-
-  const lis = tasks.map(task => <TaskItem onComplete={completeItem} item={task} />);
+  const lis = tasks.map(task => (
+    <TaskItem
+      onComplete={task => {
+        tasksCol.doc(task.id).delete()
+      }} item={task} />
+  ));
 
   return (
     <div className="container mx-auto">
       <h2 className="text-3xl">{user.uid}</h2>
+      <PurpleButton
+        onClick={() => {
+          logInUser(app);
+        }}
+      >
+        LOG IN
+      </PurpleButton>
 
-      <InputBar onNewValue={name => {
-        tasksCol.add({
-          name,
-          uid: user.uid
-        })
-      }} />
+      <InputBar
+        onNewValue={name => {
+          tasksCol.add({
+            name,
+            uid: user.uid
+          });
+        }}
+      />
 
-      <ul className="w-full">{lis}</ul>
+      <ul>{lis}</ul>
     </div>
   );
 }
 
 createRoot(document.querySelector("#root")).render(<FirebaseWrappedApp />);
+
+// render(<App />, document.querySelector('#root'));
