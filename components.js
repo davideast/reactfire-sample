@@ -1,6 +1,15 @@
 import React, { Suspense } from "react";
 
-function PurpleButton({ children, onClick }) {
+/*
+
+		match /tasks/{taskId} {
+    	allow read: if true;
+      allow write: if request.auth.uid == request.resource.data.uid;
+    }
+
+*/
+
+export function PurpleButton({ children, onClick }) {
   onClick = onClick || function() {};
   return (
     <button
@@ -35,3 +44,4 @@ export function InputBar({ onNewValue }) {
     </div>
   )
 }
+
